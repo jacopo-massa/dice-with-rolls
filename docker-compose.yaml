@@ -1,0 +1,53 @@
+version: '3'
+services:
+  gateway:
+    build: ./dwr-api-gateway
+    container_name: gateway
+    ports:
+      - "5000:5000"
+
+  users:
+    build: ./dwr-users
+    container_name: users
+    ports:
+      - "5001:5001"
+
+
+  dice:
+    build: ./dwr-dice
+    container_name: dice
+    ports:
+      - "5002:5002"
+
+  stories:
+    build: ./dwr-stories
+    container_name: stories
+    ports:
+      - "5003:5003"
+
+  reactions:
+    build: ./dwr-reactions
+    container_name: reactions
+    ports:
+      - "5004:5004"
+    stdin_open: true
+    tty: true
+
+  redis-gateway:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+  redis-reactions:
+    image: "redis:alpine"
+    ports:
+      - "6397:6379"
+
+
+# networks:
+#   dice_network:
+#     driver: bridge
+#     ipam:
+#       config:
+#         - subnet: 172.18.0.0/16
+
